@@ -67,11 +67,10 @@ Consumer<List<IExcelModel>> onDone = lstObj -> {
 reader.readAsync(file, onDone);
 ```
 4. Update **OimProvBatch_20180529.properties**
-```
-**EXCEL_FILE_PATH**: Path of excel file. (Sample excel file: **output/oim_user_20180528.xlsx**)
-**C_ROW_HEADER**: Row in excel file are header. Data will be read from **C_ROW_HEADER + 1**
-**USR_NEED_CHANGE_PASS**: Update user password or not. Default is **BLANK** or **FALSE**
-**OIM_PROVIDER_URL**: OIM 's server address. (Ex: t3://10.4.18.114:14000)
-**OIM_ADMIN_USER**: Admin user (Ex: xelsysadm)
-**OIM_ADMIN_PASS**: Admin password.
-```
+
+- **EXCEL_FILE_PATH**: Path of excel file. (Sample excel file: **output/oim_user_20180528.xlsx**)
+- **C_ROW_HEADER**: Row in excel file are header. Data will be read from **C_ROW_HEADER + 1**
+- **USR_NEED_CHANGE_PASS**: Update user password or not. Default is **BLANK** or **FALSE**
+- **OIM_PROVIDER_URL**: OIM 's server address. (Ex: t3://10.4.18.114:14000)
+- **OIM_ADMIN_USER**: Admin user (Ex: xelsysadm)
+- **OIM_ADMIN_PASS**: Admin password
