@@ -8,6 +8,7 @@ Git clone the project on your local machine and add it to your workspace (I'm us
 ### Prerequisites
 
 For running this, you will need
+
  - Java 1.8
  - ExcelReader (https://github.com/dainv91/ExcelReader)
  - Oracle Identity Management libraries(http://www.oracle.com/technetwork/middleware/id-mgmt/overview/index.html) (included in project)
@@ -35,6 +36,7 @@ public void mapColumnWithIndex() {
 }
 ```
 - And method **createFromFields**
+
 ```java
 @Override
 public IExcelModel createFromFields(Map<String, Field> fields) {
@@ -44,9 +46,11 @@ public IExcelModel createFromFields(Map<String, Field> fields) {
 ```
 
 2. Create new instance of **IExcelReader**. It takes **rowHeader** and an instance of **IExcelModel** as parameters. For example **ExcelReaderImpl**
+
 ```java
 IExcelReader reader = new ExcelReaderImpl(rowHeader, new OimExcelUser());
 ```
+
 3. Now you can use these function of **IExcelReader**
 ```java
 List<IExcelModel> read(String file);	
@@ -66,6 +70,7 @@ Consumer<List<IExcelModel>> onDone = lstObj -> {
 };
 reader.readAsync(file, onDone);
 ```
+
 4. Update **OimProvBatch_20180529.properties**
 
 - **EXCEL_FILE_PATH**: Path of excel file. (Sample excel file: **output/oim_user_20180528.xlsx**)
