@@ -11,7 +11,7 @@ For running this, you will need
 
  - Java 1.8
  - ExcelReader (https://github.com/dainv91/ExcelReader)
- - Oracle Identity Management libraries(http://www.oracle.com/technetwork/middleware/id-mgmt/overview/index.html) (included in project)
+ - Oracle Identity Management libraries (http://www.oracle.com/technetwork/middleware/id-mgmt/overview/index.html) (included in project)
 
 ## How to
 
