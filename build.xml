@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. -->
+<project basedir="." default="export" name="OimProvBatch">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../setup/x64/eclipse-jee-oxygen-3a-win32-x86_64/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="OimProvBatch.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="libs/ExcelReader_20180529.jar"/>
+        <pathelement location="libs/poi-lib/commons-collections4-4.1.jar"/>
+        <pathelement location="libs/ooxml-lib/curvesapi-1.04.jar"/>
+        <pathelement location="libs/ooxml-lib/xmlbeans-2.6.0.jar"/>
+        <pathelement location="libs/poi-3.17.jar"/>
+        <pathelement location="libs/poi-ooxml-3.17.jar"/>
+        <pathelement location="libs/poi-ooxml-schemas-3.17.jar"/>
+        <pathelement location="libs/oim/oimclient.jar"/>
+        <pathelement location="libs/oim/jrf-api.jar"/>
+        <pathelement location="libs/oim/commons-logging.jar"/>
+        <pathelement location="libs/oim/lib/oim-manifest.jar"/>
+        <pathelement location="libs/oim/lib/wlXLSecurityProviders.jar"/>
+        <pathelement location="libs/oim/lib/xlAdapterUtilities.jar"/>
+        <pathelement location="libs/oim/lib/xlAPI.jar"/>
+        <pathelement location="libs/oim/lib/xlAttestation.jar"/>
+        <pathelement location="libs/oim/lib/xlAuditor.jar"/>
+        <pathelement location="libs/oim/lib/xlAuthentication.jar"/>
+        <pathelement location="libs/oim/lib/xlBackOfficeBeans.jar"/>
+        <pathelement location="libs/oim/lib/xlBackofficeClient.jar"/>
+        <pathelement location="libs/oim/lib/xlCache.jar"/>
+        <pathelement location="libs/oim/lib/xlCrypto.jar"/>
+        <pathelement location="libs/oim/lib/xlDataObjectBeans.jar"/>
+        <pathelement location="libs/oim/lib/xlDataObjects.jar"/>
+        <pathelement location="libs/oim/lib/xlDDM.jar"/>
+        <pathelement location="libs/oim/lib/xlGenConnector.jar"/>
+        <pathelement location="libs/oim/lib/xliGCProviders.jar"/>
+        <pathelement location="libs/oim/lib/xlInputPreprocessor.jar"/>
+        <pathelement location="libs/oim/lib/xlLogger.jar"/>
+        <pathelement location="libs/oim/lib/xlRemoteManager.jar"/>
+        <pathelement location="libs/oim/lib/xlRequestPreview.jar"/>
+        <pathelement location="libs/oim/lib/xlScheduler.jar"/>
+        <pathelement location="libs/oim/lib/xlUtils.jar"/>
+        <pathelement location="libs/oim/lib/xlVO.jar"/>
+        <pathelement location="libs/oim/common_lib/XellerateClient.jar"/>
+        <pathelement location="libs/oim/ext/wlthint3client.jar"/>
+    </path>
+
+	<property name="jar_file" value="output/OimProvBatch_20180530.jar" />
+	<target name="delete-jar">
+			<delete file="${jar_file}" />
+	</target>
+	<target name="export" depends="delete-jar">
+		<manifest file="bin/MANIFEST.MF">
+			<attribute name="Main-Class" value="vn.iadd.oim.user.test.UserBatch"/>
+		</manifest>
+		<jar destfile="${jar_file}" basedir="bin" manifest="bin/MANIFEST.MF">
+			<include name="*.properties"/>
+			<include name="**/*.class"/>
+		</jar>
+	</target> 
+	
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="OimProvBatch.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="UserBatch">
+        <java classname="vn.iadd.oim.user.test.UserBatch" failonerror="true" fork="yes">
+            <classpath refid="OimProvBatch.classpath"/>
+        </java>
+    </target>
+</project>
