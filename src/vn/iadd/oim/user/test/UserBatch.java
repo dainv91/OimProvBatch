@@ -28,22 +28,11 @@ public class UserBatch {
 		
 		IExcelReader reader = new ExcelReaderImpl(rowHeader, new OimExcelUser());
 		Consumer<List<IExcelModel>> onDone = lstObj -> {
-			tryClose(reader);
+			vn.iadd.oim.util.ObjectUtil.tryClose(reader);
 			List<OimExcelUser> lst = UserHelper.convert(lstObj);
 			boolean[] result = helper.createOrUpdate(lst);
 			log(Arrays.toString(result));
 		};
 		reader.readAsync(file, onDone);
-	}
-	
-	static void tryClose(AutoCloseable closeable) {
-		if (closeable == null) {
-			return;
-		}
-		try {
-			closeable.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 	}
 }
