@@ -19,19 +19,39 @@ import vn.iadd.excel.IExcelModel;
 import vn.iadd.oim.user.model.OimExcelUser;
 import vn.iadd.util.Logger;
 
+/**
+ * UserHelper
+ * @author DaiNV
+ * @since 20180530
+ */
 public class UserHelper {
 	
-	
+	/**
+	 * OimHelper
+	 */
 	private OimHelper helper = new OimHelper();
 	
+	/**
+	 * Oracle UserManager
+	 */
 	private UserManager userManager;
 
+	/**
+	 * Need change pass
+	 */
 	private boolean needChangePass;
 	
+	/**
+	 * Default constructor
+	 */
 	public UserHelper() {
 		this(false);
 	}
 	
+	/**
+	 * Constructor
+	 * @param needChangePass boolean
+	 */
 	public UserHelper(boolean needChangePass) {
 		this.needChangePass = needChangePass;
 	}

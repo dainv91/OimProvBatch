@@ -8,6 +8,12 @@ import oracle.iam.platform.OIMClient;
 import vn.iadd.oim.util.ConfigUtils;
 import vn.iadd.util.Logger;
 
+/**
+ * OimHelper
+ * @author DaiNV
+ * @since 20180530
+ *
+ */
 public class OimHelper {
 
 	private String oimAuthwlPath;
@@ -27,6 +33,12 @@ public class OimHelper {
 				ConfigUtils.getConfig("OIM_ADMIN_USER"), ConfigUtils.getConfig("OIM_ADMIN_PASS"));
 	}
 
+	/**
+	 * Constructor 
+	 * @param url String
+	 * @param user String
+	 * @param pass String
+	 */
 	public OimHelper(String url, String user, String pass) {
 		this(ConfigUtils.getConfig("OIM_AUTHWL_PATH"), ConfigUtils.getConfig("OIM_APPSERVER_TYPE"),
 				ConfigUtils.getConfig("OIM_FACTORY_INITIAL_TYPE"), url, user, pass);
