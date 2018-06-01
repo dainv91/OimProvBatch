@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="libs/ExcelReader_20180529.jar"/>
 	<classpathentry kind="lib" path="libs/poi-lib/commons-collections4-4.1.jar"/>
 	<classpathentry kind="lib" path="libs/ooxml-lib/curvesapi-1.04.jar"/>
 	<classpathentry kind="lib" path="libs/ooxml-lib/xmlbeans-2.6.0.jar"/>
@@ -37,5 +36,6 @@
 	<classpathentry kind="lib" path="libs/oim/lib/xlVO.jar"/>
 	<classpathentry kind="lib" path="libs/oim/common_lib/XellerateClient.jar"/>
 	<classpathentry kind="lib" path="libs/oim/ext/wlthint3client.jar"/>
+	<classpathentry kind="lib" path="libs/ExcelReader_20180601_v1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
