@@ -1,6 +1,8 @@
 package vn.iadd.oim.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,6 +21,8 @@ import oracle.iam.provisioning.vo.Account;
 import oracle.iam.provisioning.vo.AccountData;
 import oracle.iam.provisioning.vo.ApplicationInstance;
 import oracle.iam.provisioning.vo.ChildTableRecord;
+import oracle.iam.provisioning.vo.FormField;
+import oracle.iam.provisioning.vo.FormInfo;
 import vn.iadd.oim.helper.OimHelper;
 import vn.iadd.util.Logger;
 
@@ -37,40 +41,67 @@ public class ProvisioningUtils {
 		Logger.log(ProvisioningUtils.class, msg.toString());
 	}
 	
+	/**
+	 * Get map from name
+	 * @param form FormInfo
+	 * @return Map<String, String> UD_XXX - label
+	 */
+	private static Map<String, String> getMapFormName(FormInfo form) {
+		Map<String, String> map = new HashMap<>();
+		if (form == null) {
+			return map;
+		}
+		List<FormField> fields = form.getFormFields();
+        for (FormField f : fields) {
+        	map.put(f.getLabel(), f.getName());
+        }
+		return map;
+	}
+	
+	private static Map<String, Object> getMapFormDataFromLabel(Map<String, String> mapFormName, Map<String, Object> mapLabel) {
+		Map<String, Object> map = new HashMap<>();
+        for (String label: mapLabel.keySet()) {
+        	if (!mapFormName.containsKey(label)) {
+        		log("Invalid form label: " + label);
+        		continue;
+        	}
+        	map.put(mapFormName.get(label), mapLabel.get(label));
+        }
+        return map;
+	}
+	
 	public static void provisionResourceAccountToUser(OimHelper oimHelper, String userLogin, String appInstName,
 			Map<String, Object> parent, Map<String, ArrayList<ChildTableRecord>> child)
 			throws AccessDeniedException, UserNotFoundException, ApplicationInstanceNotFoundException,
 			GenericProvisioningException, GenericAppInstanceServiceException, NoSuchUserException, UserLookupException,
 			oracle.iam.platform.authz.exception.AccessDeniedException {
+		
 		// Get OIM User searching by User Login (USR.USR_LOGIN)
 		boolean isUserLogin = true; // True for searching by User Login; False for searching by USR_KEY
 		Set<String> retAttrs = null; // Return attributes; Null implies returning every attributes on user
-		User user = oimHelper.getService(UserManager.class).getDetails(userLogin, retAttrs, isUserLogin); // Get OIM
-																											// User
-		// logger.log(ODLLevel.NOTIFICATION, "User: {0}", new Object[]{user});
+		User user = oimHelper.getService(UserManager.class).getDetails(userLogin, retAttrs, isUserLogin); // Get OIM User
+		
+		log("User: " + user);
 
 		// Get application instance by name (APP_INSTANCE.APP_INSTANCE_NAME)
 		ApplicationInstance appInst = oimHelper.getService(ApplicationInstanceService.class)
 				.findApplicationInstanceByName(appInstName);
-		// logger.log(ODLLevel.NOTIFICATION, "Application Instance: {0}", new
-		// Object[]{appInst});
-
+		log("AppInstance: " + appInst);
+		
+		Map<String, String> mapFormName  = getMapFormName(appInst.getAccountForm());
+        Map<String, Object> parentData = getMapFormDataFromLabel(mapFormName, parent);
 		// Get information required provisioning resource account
 		String usrKey = user.getId(); // Get usr_key of OIM User
 		Long resourceFormKey = appInst.getAccountForm().getFormKey(); // Get Process Form Key (SDK_KEY)
-		// logger.log(ODLLevel.NOTIFICATION, "Resource Process Form Key: {0}", new
-		// Object[]{resourceFormKey});
 		String udTablePrimaryKey = null;
 
 		// Construct-Stage Resource Account
-		AccountData accountData = new AccountData(String.valueOf(resourceFormKey), udTablePrimaryKey, parent);
+		AccountData accountData = new AccountData(String.valueOf(resourceFormKey), udTablePrimaryKey, parentData);
 		accountData.setChildData(child);
 		Account resAccount = new Account(appInst, accountData);
 
 		// Provision resource account to user
 		Long accountId = oimHelper.getService(ProvisioningService.class).provision(usrKey, resAccount); // Account Key = OIU_KEY
-		// logger.log(ODLLevel.NOTIFICATION, "Provisioning Account Id: {0}", new
-		// Object[]{accountId});
 		log(accountId);
 	}
 }
