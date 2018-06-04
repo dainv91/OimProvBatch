@@ -24,4 +24,24 @@ public class ObjectUtil {
 			ex.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Try cast object
+	 * @param obj Object
+	 * @param clazz Class<T>
+	 * @param <T> Type parameter
+	 * @return T
+	 * 
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T> T tryGetValue(Object obj, Class<T> clazz) {
+		T result = null;
+		if (clazz == null || obj == null) {
+			return result;
+		}
+		if (obj.getClass().isAssignableFrom(clazz)) {
+			result = (T) obj;
+		}
+		return result;
+	}
 }

@@ -156,6 +156,6 @@ public class ProvisioningUtils {
 
 			// Provision resource account to user
 			Long accountId = oimHelper.getService(ProvisioningService.class).provision(usrKey, resAccount); // Account Key = OIU_KEY
-			log(accountId);
+			log("Provisioned: " + accountId + ", userLogin: " + userLogin);
 	}
 }
