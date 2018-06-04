@@ -36,6 +36,5 @@
 	<classpathentry kind="lib" path="libs/oim/lib/xlVO.jar"/>
 	<classpathentry kind="lib" path="libs/oim/common_lib/XellerateClient.jar"/>
 	<classpathentry kind="lib" path="libs/oim/ext/wlthint3client.jar"/>
-	<classpathentry kind="lib" path="libs/ExcelReader_20180601_v1.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
