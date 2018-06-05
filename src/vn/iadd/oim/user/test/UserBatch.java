@@ -31,6 +31,11 @@ public class UserBatch {
 		Consumer<List<IExcelModel>> onDone = lstObj -> {
 			vn.iadd.oim.util.ObjectUtil.tryClose(reader);
 			List<OimExcelUser> lst = UserHelper.convert(lstObj);
+			StringBuilder sb = new StringBuilder("User to update: ");
+			for (OimExcelUser user: lst) {
+				sb.append(user.getUserLogin()).append(", ");
+			}
+			log(sb.toString());
 			boolean[] result = helper.createOrUpdate(lst);
 			log(Arrays.toString(result));
 		};
