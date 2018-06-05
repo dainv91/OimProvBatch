@@ -6,4 +6,4 @@ setlocal
 call set_classpath.bat
 set CLASSPATH=%CLASSPATH%;.;
 
-%JAVA_HOME%\bin\java -cp %CLASSPATH% vn.iadd.oim.user.test.UserBatch
+%JAVA_HOME%\bin\java -cp %CLASSPATH% vn.iadd.oim.user.test.AccountBatch
