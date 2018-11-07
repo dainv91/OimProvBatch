@@ -98,6 +98,7 @@ public class AccountBatch {
 					accountHelper.provResourceAccountToUserWithChildLabel(userLogin, appInstName, parent, child);
 				}
 				// Done
+				vn.iadd.oim.util.ObjectUtil.tryClose(accountHelper);
 			};
 			String sheetChildForm = ConfigUtils.getConfig("EX_SHEET_NAME_CHILD");
 			//log(sheetChildForm);
@@ -128,6 +129,7 @@ public class AccountBatch {
 		parent.put("Email", "DAINV0_0@gmail.com");
 		
 		helper.provResourceAccountToUserWithChildLabel(userLogin, appInstName, parent, new HashMap<>());
+		vn.iadd.oim.util.ObjectUtil.tryClose(helper);
 	}
 	
 	static void testFunc() {

@@ -14,7 +14,7 @@ import vn.iadd.util.Logger;
  * @since 20180530
  *
  */
-public class OimHelper {
+public class OimHelper implements AutoCloseable {
 
 	private String oimAuthwlPath;
 	private String oimAppServerType;
@@ -111,5 +111,10 @@ public class OimHelper {
 		} catch (LoginException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void close() throws Exception {
+		oimClient.logout();
 	}
 }
